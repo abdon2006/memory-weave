@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "542358800137",
+    "project_id": "memory-weave",
+    "storage_bucket": "memory-weave.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542358800137:android:69d49b11a663ac8ec275d8",
+        "android_client_info": {
+          "package_name": "com.example.memory_weave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542358800137-35l8t167n7sdhlanjo60c6fttfkr9jbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.memory_weave",
+            "certificate_hash": "c65ea117cbaaa5871a0de3213600bda6ccfe0afa"
+          }
+        },
+        {
+          "client_id": "542358800137-abdcatqb34va082mjbahg71a4ngp3ck5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLaZfMDeti0CfulfNyzum3gMyioo5IKHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542358800137-abdcatqb34va082mjbahg71a4ngp3ck5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
