@@ -45,3 +45,6 @@ app.*.map.json
 /android/app/release
 # Images folder
 images/
+# iOS Pods (can be very large)
+ios/Pods/
+ios/.symlinks/
