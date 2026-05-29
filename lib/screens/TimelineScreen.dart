@@ -10,7 +10,8 @@ import 'package:timeline_tile/timeline_tile.dart';
 List<Map> allMemories = [];
 
 class Timelinescreen extends StatefulWidget {
-  const Timelinescreen({super.key});
+  final Animation<double> animation;
+  const Timelinescreen({super.key, required this.animation});
 
   @override
   State<Timelinescreen> createState() => _TimelinescreenState();
@@ -21,10 +22,7 @@ class _TimelinescreenState extends State<Timelinescreen>
   @override
   // ده فايدته يحمي الصفحة انها تتشال ويفضل محافظ عليها
   bool get wantKeepAlive => true;
-
   Sqldb sqldb = Sqldb();
-
-  bool is_loading = true;
 
   Future<void> readData() async {
     // اللي انا عملتها  Table اول ما الصفحة تتبني بنجيب كل الداتا بتاعتي اللي في ال
@@ -32,7 +30,6 @@ class _TimelinescreenState extends State<Timelinescreen>
     setState(() {
       // هنا بقا بنعمل عملية الدمج عشان الاتنين ليست يبقو ليست واحدة كبيرة نعرضها بعد كده
       allMemories = [...timelineScreenData, ...sqlData];
-      is_loading = false;
     });
   }
 
@@ -45,9 +42,7 @@ class _TimelinescreenState extends State<Timelinescreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return is_loading
-        ? CircularProgressIndicator()
-        : allMemories.isEmpty
+    return allMemories.isEmpty
         ? Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +117,10 @@ class _TimelinescreenState extends State<Timelinescreen>
                     axis: TimelineAxis.vertical,
                     indicatorStyle: IndicatorStyle(
                       color: AppColors.primaryBlue,
-                      indicator: PulsingDot(color: AppColors.primaryBlue),
+                      indicator: PulsingDot(
+                        color: AppColors.primaryBlue,
+                        animation: widget.animation,
+                      ),
                     ),
                     alignment: TimelineAlign.start,
                     afterLineStyle: LineStyle(

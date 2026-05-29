@@ -8,6 +8,7 @@ class AiCard extends StatelessWidget {
   final String bigtext;
   final List<String> description;
   final String buttontext;
+  final Animation<double> animation;
 
   const AiCard({
     super.key,
@@ -16,6 +17,7 @@ class AiCard extends StatelessWidget {
     required this.bigtext,
     required this.description,
     required this.buttontext,
+    required this.animation,
   });
 
   @override
@@ -59,7 +61,7 @@ class AiCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  PulsingDot(color: AppColors.burgandy),
+                  PulsingDot(color: AppColors.burgandy, animation: animation),
                   SizedBox(width: 10),
                   Text(
                     bigtext,

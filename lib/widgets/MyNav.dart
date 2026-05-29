@@ -3,12 +3,12 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:memory_weave/themes/colors.dart';
 
 class Mynav extends StatelessWidget {
-  final int current_index;
+  final int currentIndex;
   final Function(int) onTabChange;
 
   const Mynav({
     super.key,
-    required this.current_index,
+    required this.currentIndex,
     required this.onTabChange,
   });
 
@@ -36,14 +36,13 @@ class Mynav extends StatelessWidget {
           hoverColor: Colors.grey[100]!,
           activeColor: AppColors.primaryBlue,
           color: Colors.grey,
-
           tabs: [
             GButton(icon: Icons.home_filled, text: "Home"),
             GButton(icon: Icons.route_rounded, text: "Timeline"),
             GButton(icon: Icons.auto_awesome, text: "Memories"),
             GButton(icon: Icons.person_2_rounded, text: "Profile"),
           ],
-          selectedIndex: current_index,
+          selectedIndex: currentIndex,
           onTabChange: onTabChange,
         ),
       ),

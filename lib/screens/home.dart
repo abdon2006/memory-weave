@@ -8,7 +8,8 @@ import 'package:memory_weave/widgets/mytextform.dart';
 import 'package:memory_weave/widgets/scroll_animator.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Animation<double> animation;
+  const HomeScreen({super.key, required this.animation});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
   bool get wantKeepAlive => true;
 
   final searchcontroller = TextEditingController();
+
   // دي الليست اللي هنشيل فيها لحظيا الداتا المتفلترة عشان لما حد يكتب في السيرش الداتا تتفلتر علي حسب اللي مكتوب
   List filterdTimeline = [];
 
@@ -94,7 +96,10 @@ class _HomeScreenState extends State<HomeScreen>
               padding: const EdgeInsets.only(top: 15.0, left: 20),
               child: Row(
                 children: [
-                  PulsingDot(color: AppColors.primaryBlue),
+                  PulsingDot(
+                    color: AppColors.primaryBlue,
+                    animation: widget.animation,
+                  ),
                   SizedBox(width: 10),
                   Text(
                     textAlign: TextAlign.start,
@@ -207,6 +212,7 @@ class _HomeScreenState extends State<HomeScreen>
                     " gathering album " """,
                         ],
                         buttontext: "Curate Now",
+                        animation: widget.animation,
                       ),
                     ),
                   ),
@@ -224,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen>
                           " Revist The Stories From Your First National Park Trip ",
                         ],
                         buttontext: "Explore Legacy",
+                        animation: widget.animation,
                       ),
                     ),
                   ),

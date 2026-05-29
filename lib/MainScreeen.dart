@@ -15,18 +15,34 @@ class Mainscreeen extends StatefulWidget {
   State<Mainscreeen> createState() => _MainscreeenState();
 }
 
-class _MainscreeenState extends State<Mainscreeen> {
-  // Gnav عملنا متغير عشان يشاور عليرقم الصفحة عشان هيفيدنا في ال
-  late int current_index = 0;
-  PageController pageController = PageController();
+class _MainscreeenState extends State<Mainscreeen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late List<Widget> screens;
+  final PageController pageController = PageController();
+  late int currentIndex = 0;
 
-  // بعد كده يعدي عليهم indexed stack  عملنا ليست فيها كل الصفحات عشان ال
-  final List<Widget> screens = [
-    const HomeScreen(),
-    const Timelinescreen(),
-    const Memoriesscreen(),
-    const Profilescreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    )..repeat();
+    screens = [
+      HomeScreen(animation: animationController),
+      Timelinescreen(animation: animationController),
+      const Memoriesscreen(),
+      const Profilescreen(),
+    ];
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +57,10 @@ class _MainscreeenState extends State<Mainscreeen> {
         children: screens,
         onPageChanged: (val) {
           setState(() {
-            current_index = val;
+            currentIndex = val;
           });
         },
       ),
-
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
         backgroundColor: AppColors.primaryBlue,
@@ -58,10 +73,10 @@ class _MainscreeenState extends State<Mainscreeen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20.0, right: 15, left: 15),
         child: Mynav(
-          current_index: current_index,
+          currentIndex: currentIndex,
           onTabChange: (val) {
             setState(() {
-              current_index = val;
+              currentIndex = val;
             });
             pageController.jumpToPage(val);
           },
