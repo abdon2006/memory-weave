@@ -14,10 +14,16 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  // ده فايدته يحمي الصفحة انها تتشال ويفضل محافظ عليها
+  bool get wantKeepAlive => true;
+
   final searchcontroller = TextEditingController();
   // دي الليست اللي هنشيل فيها لحظيا الداتا المتفلترة عشان لما حد يكتب في السيرش الداتا تتفلتر علي حسب اللي مكتوب
   List filterdTimeline = [];
+
   @override
   void initState() {
     // مبدايا الليست دي هتاخد كل الداتا
@@ -51,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -83,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 15.0, left: 20),
               child: Row(
@@ -146,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
-
                   itemCount: filterdTimeline.length,
                   itemBuilder: (context, i) {
                     return TimelineCard(index: i, data: filterdTimeline[i]);

@@ -16,8 +16,14 @@ class Timelinescreen extends StatefulWidget {
   State<Timelinescreen> createState() => _TimelinescreenState();
 }
 
-class _TimelinescreenState extends State<Timelinescreen> {
+class _TimelinescreenState extends State<Timelinescreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  // ده فايدته يحمي الصفحة انها تتشال ويفضل محافظ عليها
+  bool get wantKeepAlive => true;
+
   Sqldb sqldb = Sqldb();
+
   bool is_loading = true;
 
   Future<void> readData() async {
@@ -38,6 +44,7 @@ class _TimelinescreenState extends State<Timelinescreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return is_loading
         ? CircularProgressIndicator()
         : allMemories.isEmpty
@@ -68,7 +75,6 @@ class _TimelinescreenState extends State<Timelinescreen> {
                       allMemories[i]["title"] ??
                       i.toString(),
                 ),
-
                 onDismissed: (direction) async {
                   var deletedItem = allMemories[i];
                   // يبقي لعنصر ده جاي من ال Table
@@ -92,7 +98,6 @@ class _TimelinescreenState extends State<Timelinescreen> {
                     print(allMemories);
                   });
                 },
-
                 background: Container(
                   height: 200,
                   decoration: BoxDecoration(
@@ -107,7 +112,6 @@ class _TimelinescreenState extends State<Timelinescreen> {
                     ),
                   ),
                 ),
-
                 child: Padding(
                   padding: const EdgeInsets.only(left: 30),
                   child: TimelineTile(
@@ -121,7 +125,6 @@ class _TimelinescreenState extends State<Timelinescreen> {
                       indicator: PulsingDot(color: AppColors.primaryBlue),
                     ),
                     alignment: TimelineAlign.start,
-
                     afterLineStyle: LineStyle(
                       thickness: 2,
                       color: Colors.grey.withOpacity(0.5),

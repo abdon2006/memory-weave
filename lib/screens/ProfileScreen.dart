@@ -20,7 +20,12 @@ class Profilescreen extends StatefulWidget {
   State<Profilescreen> createState() => _ProfilescreenState();
 }
 
-class _ProfilescreenState extends State<Profilescreen> {
+class _ProfilescreenState extends State<Profilescreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  // ده فايدته يحمي الصفحة انها تتشال ويفضل محافظ عليها
+  bool get wantKeepAlive => true;
+
   //  برضو هنا نفس الكلام اللي عملناه في صفحة الاصافة نفس الفانكشن عشان تضيفلي الصورة
   File? selectedImage;
   Sqldb sqldb = Sqldb();
@@ -44,13 +49,11 @@ class _ProfilescreenState extends State<Profilescreen> {
     // عشان مهما قفلت وفتحت الصورة تفضل محفوظة SharedPreference هنا متغير لل
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? savedImagePath = prefs.getString("profile_pic");
-
     setState(() {
       // عشان اطبع رقمها علي صفحة البروفايل Tableبعد كل الداا اللي في ال
       memoriesCount = response.length;
       // Table ونفس الكلام هنا بطبع كله بقا التايم لاين وال
       timelineCount = allMemories.length;
-
       if (savedImagePath != null) {
         selectedImage = File(savedImagePath);
       }
@@ -62,6 +65,7 @@ class _ProfilescreenState extends State<Profilescreen> {
     final authProvider = context.watch<AuthProvider>();
     String jobTitle = authProvider.userData["job"] ?? "";
     String name = authProvider.userData["username"] ?? "User";
+    super.build(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,7 +103,6 @@ class _ProfilescreenState extends State<Profilescreen> {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
@@ -119,7 +122,6 @@ class _ProfilescreenState extends State<Profilescreen> {
                     Text(jobTitle, textAlign: TextAlign.center),
                   ],
                 ),
-
                 SizedBox(width: 10),
                 InkWell(
                   onTap: () {
@@ -139,7 +141,6 @@ class _ProfilescreenState extends State<Profilescreen> {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: Row(
@@ -222,7 +223,6 @@ class _ProfilescreenState extends State<Profilescreen> {
                     ],
                   ),
                   Spacer(),
-
                   Row(
                     children: [
                       Container(

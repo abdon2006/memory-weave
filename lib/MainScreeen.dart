@@ -18,6 +18,8 @@ class Mainscreeen extends StatefulWidget {
 class _MainscreeenState extends State<Mainscreeen> {
   // Gnav عملنا متغير عشان يشاور عليرقم الصفحة عشان هيفيدنا في ال
   late int current_index = 0;
+  PageController pageController = PageController();
+
   // بعد كده يعدي عليهم indexed stack  عملنا ليست فيها كل الصفحات عشان ال
   final List<Widget> screens = [
     const HomeScreen(),
@@ -34,7 +36,15 @@ class _MainscreeenState extends State<Mainscreeen> {
         child: HomeHeader(),
       ),
       // هنا بقا هرجع في البودي البودي بتاع الصفحة اللي الانديكس واقف عليها
-      body: IndexedStack(index: current_index, children: screens),
+      body: PageView(
+        controller: pageController,
+        children: screens,
+        onPageChanged: (val) {
+          setState(() {
+            current_index = val;
+          });
+        },
+      ),
 
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
@@ -53,6 +63,7 @@ class _MainscreeenState extends State<Mainscreeen> {
             setState(() {
               current_index = val;
             });
+            pageController.jumpToPage(val);
           },
         ),
       ),

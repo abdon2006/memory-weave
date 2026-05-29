@@ -12,9 +12,15 @@ class Memoriesscreen extends StatefulWidget {
   State<Memoriesscreen> createState() => _MemoriesscreenState();
 }
 
-class _MemoriesscreenState extends State<Memoriesscreen> {
+class _MemoriesscreenState extends State<Memoriesscreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  // ده فايدته يحمي الصفحة انها تتشال ويفضل محافظ عليها
+  bool get wantKeepAlive => true;
   // ده متغير عشان يشيل ال قسم اللي انا مختاره حاليا
+
   MemoryType? selectedFilter;
+
   final searchcontroller = TextEditingController();
 
   @override
@@ -33,6 +39,7 @@ class _MemoriesscreenState extends State<Memoriesscreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -91,7 +98,6 @@ class _MemoriesscreenState extends State<Memoriesscreen> {
     selectedFilter = type;
     // بنحفظ اختارنا اي عشان لون الزرار
     String searchFilter = searchcontroller.text.toLowerCase();
-
     if (type == null) {
       // نرجعله كل الميموريز All عشان لما يدوس علي
       setState(() {
@@ -109,11 +115,9 @@ class _MemoriesscreenState extends State<Memoriesscreen> {
       setState(() {
         displayedMemories = memoriesData.where((item) {
           bool matchesType = (item.type == type);
-
           bool matchesText =
               (searchFilter.isEmpty ||
               item.title.toLowerCase().contains(searchFilter));
-
           return matchesText && matchesType;
         }).toList();
       });
@@ -122,7 +126,6 @@ class _MemoriesscreenState extends State<Memoriesscreen> {
 
   Widget filterChip(String label, MemoryType? type) {
     bool isSelected = selectedFilter == type;
-
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
