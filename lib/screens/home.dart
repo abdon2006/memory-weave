@@ -201,6 +201,7 @@ class _HomeScreenState extends State<HomeScreen>
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: ScrollAnimator(
+                      key: ValueKey("PATTERN FOUND"),
                       child: AiCard(
                         headtext: "PATTERN FOUND",
                         icon: Icons.stacked_line_chart_rounded,
@@ -220,6 +221,7 @@ class _HomeScreenState extends State<HomeScreen>
                   Padding(
                     padding: EdgeInsetsGeometry.symmetric(horizontal: 30),
                     child: ScrollAnimator(
+                      key: ValueKey("MEMORY LANE"),
                       child: AiCard(
                         headtext: "MEMORY LANE",
                         icon: Icons.watch_later_outlined,
