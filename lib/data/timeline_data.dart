@@ -159,8 +159,6 @@ final List<MemoryItem> memoriesData = [
     isFeatured: false,
   ),
 ];
-// دي برضو عشان صفحة الميموريز بس عشان لما اختار القسمهي اللي هتشيل الداتا لحظيا
-List<MemoryItem> displayedMemories = [];
 
 // عشان صفحة البروفايل
 List<String> profileText = [
