@@ -373,9 +373,6 @@ class _ProfilescreenState extends State<Profilescreen>
         description: const Text("The New Photo Had Been Applied"),
         animationType: AnimationType.fromTop,
       ).show(context);
-      print(
-        "=================== صورة البروفايل اتحفظت بنجاح =======================",
-      );
     }
   }
 }

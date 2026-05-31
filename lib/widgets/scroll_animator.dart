@@ -23,7 +23,6 @@ class _ScrollAnimatorState extends State<ScrollAnimator>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-
     // أنيميشن الشفافية (من 0 لـ 1)
     _fadeAnimation = Tween<double>(
       begin: 0.0,
@@ -46,8 +45,7 @@ class _ScrollAnimatorState extends State<ScrollAnimator>
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      // الـ key مهم عشان المكتبة تفرق بين الكروت
-      key: UniqueKey(),
+      key: widget.key!,
       onVisibilityChanged: (info) {
         // info.visibleFraction دي بتجيب نسبة ظهور الكارت (من 0 لـ 1)
         if (info.visibleFraction > 0.15) {

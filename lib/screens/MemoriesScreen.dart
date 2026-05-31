@@ -196,7 +196,6 @@ There Is No Notes With
           List<MemoryItem> filtered = memoriesData.where((item) {
             return item.title.toLowerCase().contains(searchFilter);
           }).toList();
-          print(" All : $filtered");
           buildRows(filtered);
         }
       });
@@ -209,7 +208,6 @@ There Is No Notes With
               item.title.toLowerCase().contains(searchFilter));
           return matchesText && matchesType;
         }).toList();
-        print(" type : $filtered");
         buildRows(filtered);
       });
     }

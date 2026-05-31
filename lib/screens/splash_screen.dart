@@ -11,25 +11,23 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void next() async {
     await Future.delayed(const Duration(seconds: 5));
-    if (!context.mounted) return;
-
+    if (!mounted) return;
     // كنا بنعاني من مشكلة ان الترانسيشن مش بيبان وبيقطع وده بسبب ان في صور كتير بتحمل وحجمها كبير
     // كان بيعلق فعشان كده ضفنا السطور دي اللي هو اتاكد من تحميل كل الصور قبل ما تروح onboarding وهو بينقل لل
+    BuildContext ctx = context;
     await Future.wait([
-      precacheImage(const AssetImage("images/on1.jpg"), context),
-      precacheImage(const AssetImage("images/on2.jpg"), context),
-      precacheImage(const AssetImage("images/on33.jpg"), context),
+      precacheImage(const AssetImage("images/on1.jpg"), ctx),
+      precacheImage(const AssetImage("images/on2.jpg"), ctx),
+      precacheImage(const AssetImage("images/on33.jpg"), ctx),
     ]);
-
-    if (!context.mounted) return;
-    Navigator.pushReplacementNamed(context, "AuthWrapper");
+    if (!mounted) return;
+    Navigator.pushReplacementNamed(ctx, "AuthWrapper");
   }
 
   @override
   void initState() {
-    super.initState();
-    // اول ما نستدعي االصفحة بنستعي الفانكشن اللي بتعمل التايمر عشان تنتقل بعدها
     next();
+    super.initState();
   }
 
   @override
@@ -59,10 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("images/icon.png"),
-
-                // المساحة اللي بتفصل اللوجو عن الكلام عشان ميكونوش لازقين في بعض
                 const SizedBox(height: 30),
-
                 Column(
                   children: [
                     Text(
@@ -73,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8), // مسافة صغيرة إضافية للجمال
+                    const SizedBox(height: 8),
                     Text(
                       "Weave Your Life's Story.",
                       style: TextStyle(
